@@ -43,7 +43,7 @@ class NaverSession(requests.Session):
         }
         resp = self.post(login_url, params, headers=headers).content
 
-        if 'https://nid.naver.com/login/sso/finalize.nhn' in resp:
+        if 'https://nid.naver.com/login/sso/finalize.nhn' in resp or "https://nid.naver.com/nidlogin.login?svctype=0" in resp:
             if do_finalize:
                 finalize_url_pattern = r'location\.replace\("(.+?)"\);'
                 finalize_url = re.findall(finalize_url_pattern, resp)[0]
